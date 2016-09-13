@@ -1,0 +1,18 @@
+HDF4 Reader:
+https://hdfgroup.org/wp/2015/04/hdf5-for-the-web-hdf-server/ 
+http://hdfeos.org/software/pomegranate.php
+W10n
+http://airsl2.gesdisc.eosdis.nasa.gov/pomegranate/Aqua_AIRS_Level2/ 
+http://opensource.gsfc.nasa.gov/projects/heserve/index.php 
+W10n
+Uses Pomegranate to generate URLs to return data
+URL structure
+[path to file]/[field]?output=[type]
+Types
+Json
+Html
+Nc (netCDF)
+Source: http://nasa.github.io/w10n-reinvent/slides/#intro 
+Goddard’s Pomegranate Server
+http://airsl2.gesdisc.eosdis.nasa.gov/pomegranate/Aqua_AIRS_Level2/AIRX2RET.006/2016/001/AIRS.2016.01.01.001.L2.RetStd.v6.0.31.0.G16001153044.hdf/?output=html 
+
