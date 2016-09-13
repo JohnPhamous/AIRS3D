@@ -28,24 +28,21 @@ granule_properties = {key: None for key in granule_properties}
 debug = True    # Used to test functions without having to manually input
 
 if debug == True:
-    month = 1
+    month = 10
     day = 25
     year = 2006
     granule = 42
 else:
     print("Enter granule info below")
     month = input("Month(1-12): ")
-    month = "{0}".format(str(month).zfill(2))   # Makes sure the month is in XX
     day = input("Day(1-31): ")
-    day = "{0}".format(str(day).zfill(2))   # Makes sure the day is in XX
     year = str(input("Year(XXXX): "))
-    if len(year) != 4:  # Makes sure the year is in XXXX
-        print("Invalid year entered")
-        exit()
-    else:
-        year = int(year)
     granule = input("Granule: ")
     granule = "{0}".format(str(granule).zfill(3))
+
+# TODO fills are not working
+day = int("{0}".format(str(day).zfill(2)))   # Makes sure the day is in XX
+month = int("{0}".format(str(month).zfill(2)))   # Makes sure the month is in XX
 print("Searching for granule {} on {}-{}-{}".format(granule, month, day, year))
 
 def convert_days(year, month, day):
@@ -55,6 +52,14 @@ def convert_days(year, month, day):
     return day_of_year
 
 day_of_year = convert_days(year, month, day)
+
+# TODO find url based on user input, then user will select which file to use
+url = ("http://airsl2.gesdisc.eosdis.nasa.gov/pomegranate/Aqua_AIRS_Level2/AIRX2RET.006/{}/{}/AIRS.{}.{}.{}.001.L2.RetStd.v6.0.31.0.G16008144115.hdf/?output=html".format(year,
+                                                                                                                                                                    day_of_year,
+                                                                                                                                                                    year,
+                                                                                                                                                                    month,
+                                                                                                                                                                    day))
+print(url)
 
 def download_data(name, url):
     # Downloads json from Pomegranate server then returns a list of values
