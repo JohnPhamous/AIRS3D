@@ -1,0 +1,8 @@
+#!/bin/bash
+
+./pickleclouds.py --verstag v6
+
+/opt/packages/blender-2.76b/blender --background --python visualizer7.py -- \
+        --date 20020906 --gran 50 --ver v6 \
+        --cphase --no-ctype --no-lowrender
+

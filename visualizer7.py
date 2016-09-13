@@ -10,6 +10,7 @@ from random import randint
 import numpy as np
 from math import pi
 from enum import Enum
+import json
 
 lev100 = np.array( [
     0.01610000, 0.03840000, 0.07690000, 0.1370000, 0.2244000,
@@ -472,14 +473,14 @@ def nameGreenishColor(scaleVal):
 
 
 def greenishColors(numColor):
-    botR = 1.00 
-    botG = 0.70 
+    botR = 1.00
+    botG = 0.70
     botB = 0.05
-    midR = 0.50 
-    midG = 1.00 
+    midR = 0.50
+    midG = 1.00
     midB = 0.50
-    topR = 0.05 
-    topG = 0.70 
+    topR = 0.05
+    topG = 0.70
     topB = 1.00
     for iColor in range(numColor):
         scaleFrac = iColor / (numColor-1.0)
@@ -502,14 +503,14 @@ def greenishColors(numColor):
 
 
 def bwrColors(numColor):
-    botR = 0.10 
-    botG = 0.10 
+    botR = 0.10
+    botG = 0.10
     botB = 1.00
-    midR = 1.00 
-    midG = 1.00 
+    midR = 1.00
+    midG = 1.00
     midB = 1.00
-    topR = 1.00 
-    topG = 0.10 
+    topR = 1.00
+    topG = 0.10
     topB = 0.10
     for iColor in range(numColor):
         scaleFrac = iColor / (numColor-1.0)
@@ -1033,7 +1034,7 @@ def makeClouds(fname_pkl):
                 (isc + 1), args.date, granule, outTag))
             ysc_km = (isc - 135.0 / 2.0) * 15.0
             ysc = ysc_km / kmPerBlend
-    
+
             for ifp in range(horizDecim // 2, 90, horizDecim):
                 scanang_deg = (ifp - 44.5) * 1.1
                 scanang_rad = np.radians(scanang_deg)
@@ -1046,7 +1047,7 @@ def makeClouds(fname_pkl):
                         1 - np.power(PCldTop[isc, ifp, icl] / 1013.25, 0.190284)) * 145366.45
                     zcldtop_km = zcldtop_feet * 0.3048 * 0.001
                     zcldtop = zcldtop_km / kmPerBlendZ
-    
+
                     if icl == 0:
                         frac = CldFrcStd[isc, ifp, icl]
                     else:
@@ -1222,7 +1223,7 @@ def makeClouds(fname_pkl):
                         elif cloudType == CloudType.St:
                             bpy.context.object.data.materials.append(
                                 bpy.data.materials["St"])
-    
+
                     if (thickbytype == True):
                         if cloudType == CloudType.Ac:
                             cloudThickKm = 1.2
@@ -1253,12 +1254,12 @@ def makeClouds(fname_pkl):
                             0] = horizDecim * fracMult * xsmear * hmag * xelong * nadirRadKm / kmPerBlend
                         bpy.context.object.scale[
                             1] = horizDecim * fracMult * hmag * nadirRadKm / kmPerBlend
-    
+
                     if cloudThickKm > zcldtop_km - 0.2:
                         cloudThickKm = zcldtop_km - 0.2
-    
+
                     cloudThickBlend = cloudThickKm / kmPerBlendZ
-    
+
                     if icl == 0:
                         zcldtop0 = zcldtop
                         zcldbot0 = zcldtop - cloudThickBlend
@@ -1278,16 +1279,16 @@ def makeClouds(fname_pkl):
                             if cloudThickKm <= 0.5:
                                 print("    Adjusted bottom cloud would be too thin: {}".format( cloudThickKm))
                                 continue
-    
+
                     bpy.context.object.scale[2] = cloudThickBlend
                     # print("Scale", bpy.context.object.scale)
-    
+
                     bpy.context.scene.objects.active.location = (
                         xfp,
                         ysc,
                         zcldtop - cloudThickBlend / 2.0)
                     # print("location", bpy.context.scene.objects.active.location)
-    
+
                     # Copies mesh data for the first one
                     if bpy.context.scene.objects.active.name == "Cylinder":
                         obj = bpy.context.scene.objects.active.copy()
