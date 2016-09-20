@@ -7,7 +7,6 @@ except ImportError:
     import requests, json, datetime
     blender = False
 
-debug = False    # Used to test functions without having to manually input
 
 def convert_days(year, month, day):
     # Converts the user's date into the day of the year (1-365/366)
@@ -42,7 +41,7 @@ granule_properties = {"Longitude", "Latitude","TSurfStd", "TSurfAir",
 # Populates keys with None value
 granule_properties = {key: None for key in granule_properties}
 
-if debug == True:
+if blender == True:
     month = 10
     day = 25
     year = 2010
